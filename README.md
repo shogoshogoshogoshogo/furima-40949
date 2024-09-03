@@ -1,7 +1,7 @@
 Furima ER
 
 usersテーブル
-email(string, NOT NULL, ユニーク制約)
+email(string型, NOT NULL, ユニーク制約)
 encrypted_password(string型, NOT NULL)
 name(string型, NOT NULL)
 nickname(string型, NOT NULL)
