@@ -58,7 +58,7 @@ has_one :address
 |---------------------|------|---------------------------------|
 |order                |references|null: false,foreign_key: true|  
 |postal_code          |string|null:false                       |
-|region               |integer|null:false                      |
+|region_id           　|integer|null:false                      |
 |city                 |string|null:false                       |
 |street               |string|null:false                       |  
 |building_name        |string|                                 |
