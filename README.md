@@ -30,8 +30,7 @@ has_many :items
 |region_id            |integer|null:false                      |
 |time_id              |integer|null:false                      |
 |price                |integer|null:false                      |
-|user                 |reference|null: false,foreign_key: true |
-|order                |reference|null: false,foreign_key: true |
+|user                 |references|null: false,foreign_key: true|
 
 
 ## Association
@@ -43,8 +42,8 @@ belongs_to :order
 
 |Column               |Type  |Options                           |
 |---------------------|------|----------------------------------|
-|user                 |reference|null:false                     |  
-|item                 |reference|null:false                     |
+|user                 |references|null:false                    |  
+|item                 |references|null:false                    |
 
 
 ## ## Association
@@ -55,15 +54,15 @@ has_one :address
 
 ## addresses テーブル
 
-|Column               |Type  |Options                  |
-|---------------------|------|-------------------------|
-|order                |reference|null: false           |  
-|postal_code          |string|null:false               |
-|prefecture           |integer|null:false              |
-|city                 |string|null:false               |
-|street               |string|null:false               |  
-|building_name        |string|                         |
-|phone_number         |string|null:false               |
+|Column               |Type  |Options                          |
+|---------------------|------|---------------------------------|
+|order                |references|null: false,foreign_key: true|  
+|postal_code          |string|null:false                       |
+|region               |integer|null:false                      |
+|city                 |string|null:false                       |
+|street               |string|null:false                       |  
+|building_name        |string|                                 |
+|phone_number         |string|null:false                       |        
 
 ## ## Association
 
