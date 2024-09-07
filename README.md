@@ -4,7 +4,7 @@ Furima ER
 
 |Column               |Type  |Options                  |
 |---------------------|------|-------------------------|
-|nickname             |string|null:false,              |  
+|nickname             |string|null:false               |  
 |email                |string|null:false, unique: true |
 |encrypted_password   |string|null:false               |
 |family_name          |string|null:false               |
@@ -13,42 +13,58 @@ Furima ER
 |first_name_kana      |string|null:false               |
 |birthdate            |date  |null:false               |
 
+## Association
+
+has_many :orders
+has_many :items
+
 ## items テーブル
 
 |Column               |Type  |Options                          |
 |---------------------|------|---------------------------------|
-|image_file           |string|null:false                       |  
 |name                 |string|null:false                       |
 |description          |text  |null:false                       |
-|category             |string|null:false                       |
-|status               |string|null:false                       |  
-|responsibility       |string|null:false                       |
-|region               |string|null:false                       |
-|time                 |string|null:false                       |
+|category_id          |integer|null:false                      |
+|status_id            |integer|null:false                      |  
+|responsibility_id    |integer|null:false                      |
+|region_id            |integer|null:false                      |
+|time_id              |integer|null:false                      |
 |price                |integer|null:false                      |
 |user                 |reference|null: false,foreign_key: true |
 |order                |reference|null: false,foreign_key: true |
 
 
+## Association
+
+belongs_to :user
+belongs_to :order
+
 ## orders テーブル
 
 |Column               |Type  |Options                           |
 |---------------------|------|----------------------------------|
-|user                 |reference|null:false, foreign_key:true   |  
-|item                 |reference|null:false, foreign_key:true   |
+|user                 |reference|null:false                     |  
+|item                 |reference|null:false                     |
 
 
+## ## Association
 
-
+belongs_to :user
+belongs_to :item
+has_one :address
 
 ## addresses テーブル
 
 |Column               |Type  |Options                  |
 |---------------------|------|-------------------------|
-|order                |reference|                      |  
+|order                |reference|null: false           |  
 |postal_code          |string|null:false               |
 |prefecture           |integer|null:false              |
 |city                 |string|null:false               |
 |street               |string|null:false               |  
 |building_name        |string|                         |
 |phone_number         |string|null:false               |
+
+## ## Association
+
+belongs_to :order
