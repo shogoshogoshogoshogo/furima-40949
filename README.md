@@ -42,8 +42,8 @@ belongs_to :order
 
 |Column               |Type  |Options                           |
 |---------------------|------|----------------------------------|
-|user                 |references|null:false                    |  
-|item                 |references|null:false                    |
+|user                 |references|null:false,foreign_key: true  |  
+|item                 |references|null:false,foreign_key: true  |
 
 
 ## ## Association
@@ -58,7 +58,7 @@ has_one :address
 |---------------------|------|---------------------------------|
 |order                |references|null: false,foreign_key: true|  
 |postal_code          |string|null:false                       |
-|region_id           　|integer|null:false                      |
+|region_id           　|integer|null:false                     |
 |city                 |string|null:false                       |
 |street               |string|null:false                       |  
 |building_name        |string|                                 |
