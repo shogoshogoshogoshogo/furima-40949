@@ -1,36 +1,57 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  before do
+    @user = FactoryBot.build(:user)
+  end
   describe 'ユーザー新規登録' do
     context '新規登録できる場合' do
       it 'nameとemail、passwordとpassword_confirmationが存在すれば登録できる' do
-        user = User.new(
-          name: 'Example User',
-          email: 'user@example.com',
-          password: 'password',
-          password_confirmation: 'password'
-        )
-        expect(user).to be_valid
+        expect(@user).to be_valid
       end
     end
-
     context '新規登録できない場合' do
       it 'nameが空では登録できない' do
-        user = User.new(name: nil)
-        user.valid?
-        expect(user.errors[:name]).to include("can't be blank")
+        @user.nickname = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Nickname can't be blank")
       end
 
       it 'emailが空では登録できない' do
-        user = User.new(email: nil)
-        user.valid?
-        expect(user.errors[:email]).to include("can't be blank")
+        @user.email = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email can't be blank")
       end
 
       it 'passwordが空では登録できない' do
-        user = User.new(password: nil)
-        user.valid?
-        expect(user.errors[:password]).to include("can't be blank")
+        @user.password = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password can't be blank")
+      end
+      it 'family_nameが空では登録できない' do
+        @user.family_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family_name can't be blank")
+      end
+      it 'first_nameが空では登録できない' do
+        @user.first_name = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First_name can't be blank")
+      end
+      it 'family_name_kanaが空では登録できない' do
+        @user.family_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Family_name_kana can't be blank")
+      end
+      it 'first_name_kanaが空では登録できない' do
+        @user.first_name_kana = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First_name_kana can't be blank")
+      end
+      it 'birthdateが空では登録できない' do
+        @user.birthdate = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Birthdate can't be blank")
       end
     end
   end
