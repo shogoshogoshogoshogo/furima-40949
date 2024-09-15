@@ -56,7 +56,7 @@ has_one :address
 
 |Column               |Type  |Options                          |
 |---------------------|------|---------------------------------|
-|order                |references|null: false                  |  
+|order                |references|null: false,foreign_key: true|   
 |postal_code          |string|null:false                       |
 |region_id             |integer|null:false                     |
 |city                 |string|null:false                       |
