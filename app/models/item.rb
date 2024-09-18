@@ -1,4 +1,6 @@
 class Item < ApplicationRecord
+  VALID_PRICE_REGEX = /\A[0-9]+\z/
+
   belongs_to :user
   has_one :order
   has_one_attached :image
@@ -9,5 +11,5 @@ class Item < ApplicationRecord
   validates :responsibility_id, presence: true
   validates :region_id, presence: true
   validates :time_id, presence: true
-  validates :price, presence: true
+  validates :price, presence: true, format: { with: VALID_PRICE_REGEX, message: 'は半角数字のみで入力してください' }
 end
