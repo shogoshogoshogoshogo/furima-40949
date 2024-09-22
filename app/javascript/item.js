@@ -3,7 +3,6 @@ const priceInput = document.getElementById("item-price");
 // 商品価格の入力イベントにリスナーを追加
 priceInput.addEventListener("input", () => {
   const inputValue = parseFloat(priceInput.value);  // 数値に変換
-  console.log(inputValue);
 
   const addTaxDom = document.getElementById("add-tax-price");
   const profitDom = document.getElementById("profit");
