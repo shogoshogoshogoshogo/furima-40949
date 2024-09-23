@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   VALID_PRICE_REGEX = /\A[0-9]+\z/
 
   belongs_to :user
-  has_one :order
+  # has_one :order
   has_one_attached :image
   validates :name, presence: true
   validates :description, presence: true
