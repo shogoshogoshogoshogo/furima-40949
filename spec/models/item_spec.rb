@@ -26,34 +26,34 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Description can't be blank")
       end
 
-      it 'category_idが空では出品できない' do
-        @item.category_id = ''
+      it 'category_idが1では出品できない' do
+        @item.category_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Category can't be blank")
+        expect(@item.errors.full_messages).to include('Category を選択してください')
       end
 
-      it 'status_idが空では出品できない' do
-        @item.status_id = ''
+      it 'status_idが1では出品できない' do
+        @item.status_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Status can't be blank")
+        expect(@item.errors.full_messages).to include('Status を選択してください')
       end
 
-      it 'responsibility_idが空では出品できない' do
-        @item.responsibility_id = ''
+      it 'responsibility_idが1では出品できない' do
+        @item.responsibility_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Responsibility can't be blank")
+        expect(@item.errors.full_messages).to include('Responsibility を選択してください')
       end
 
-      it 'region_idが空では出品できない' do
-        @item.region_id = ''
+      it 'region_idが1では出品できない' do
+        @item.region_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Region can't be blank")
+        expect(@item.errors.full_messages).to include('Region を選択してください')
       end
 
-      it 'time_idが空では出品できない' do
-        @item.time_id = ''
+      it 'time_idが1では出品できない' do
+        @item.time_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include("Time can't be blank")
+        expect(@item.errors.full_messages).to include('Time を選択してください')
       end
 
       it 'priceが空では出品できない' do
