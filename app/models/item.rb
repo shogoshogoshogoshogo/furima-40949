@@ -19,8 +19,9 @@ class Item < ApplicationRecord
   validates :responsibility_id, presence: true, numericality: { other_than: 1, message: 'を選択してください' }
   validates :region_id, presence: true, numericality: { other_than: 1, message: 'を選択してください' }
   validates :time_id, presence: true, numericality: { other_than: 1, message: 'を選択してください' }
-  validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
-                                    message: 'は300以上9999999以下である必要があります' }
+  validates :price,
+            numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
+                            message: 'は300以上9999999以下である必要があります' }
 
   validate :image_attached
 
