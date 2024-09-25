@@ -5,11 +5,11 @@ class Item < ApplicationRecord
   has_one_attached :image
 
   # ActiveHashモデルとのアソシエーション
-  belongs_to_active_hash :category_id
-  belongs_to_active_hash :status_id
-  belongs_to_active_hash :responsibility_id
-  belongs_to_active_hash :region_id
-  belongs_to_active_hash :time_id
+  belongs_to_active_hash :category
+  belongs_to_active_hash :status
+  belongs_to_active_hash :responsibility
+  belongs_to_active_hash :region
+  belongs_to_active_hash :time
 
   # バリデーション
   validates :name, presence: true
