@@ -50,10 +50,10 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include('Region を選択してください')
       end
 
-      it 'time_idが1では出品できない' do
-        @item.time_id = 1
+      it 'delivery_time_idが1では出品できない' do
+        @item.delivery_time_id = 1
         @item.valid?
-        expect(@item.errors.full_messages).to include('Time を選択してください')
+        expect(@item.errors.full_messages).to include('Delivery time を選択してください')
       end
 
       it 'priceが空では出品できない' do

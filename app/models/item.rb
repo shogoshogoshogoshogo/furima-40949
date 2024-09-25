@@ -9,8 +9,7 @@ class Item < ApplicationRecord
   belongs_to_active_hash :status
   belongs_to_active_hash :responsibility
   belongs_to_active_hash :region
-  belongs_to_active_hash :time
-
+  belongs_to_active_hash :delivery_time
   # バリデーション
   validates :name, presence: true
   validates :description, presence: true
@@ -18,7 +17,7 @@ class Item < ApplicationRecord
   validates :status_id, presence: true, numericality: { other_than: 1, message: 'を選択してください' }
   validates :responsibility_id, presence: true, numericality: { other_than: 1, message: 'を選択してください' }
   validates :region_id, presence: true, numericality: { other_than: 1, message: 'を選択してください' }
-  validates :time_id, presence: true, numericality: { other_than: 1, message: 'を選択してください' }
+  validates :delivery_time_id, presence: true, numericality: { other_than: 1, message: 'を選択してください' }
   validates :price,
             numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
                             message: 'は300以上9999999以下である必要があります' }
