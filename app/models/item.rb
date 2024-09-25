@@ -1,5 +1,4 @@
 class Item < ApplicationRecord
-  VALID_PRICE_REGEX = /\A[0-9]+\z/
 
   belongs_to :user
   # has_one :order
@@ -13,6 +12,16 @@ class Item < ApplicationRecord
   validates :responsibility_id, presence: true, numericality: { other_than: 1, message: 'を選択してください' }
   validates :region_id, presence: true, numericality: { other_than: 1, message: 'を選択してください' }
   validates :time_id, presence: true, numericality: { other_than: 1, message: 'を選択してください' }
-  validates :price, presence: true, format: { with: VALID_PRICE_REGEX, message: 'は半角数字のみで入力してください' },
-                    numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999, message: 'は300以上9999999以下である必要があります' }
+  validates :price,
+            numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9_999_999,
+                            message: 'は300以上9999999以下である必要があります' }
+
+  validate :image_attached
+
+  private
+
+  def image_attached
+    errors.add(:image, "can't be blank") unless image.attached?
+  end
 end
+
