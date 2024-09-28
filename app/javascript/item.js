@@ -41,3 +41,5 @@ function updateTaxAndProfit() {
 
 window.addEventListener("turbo:load", updateTaxAndProfit);
 window.addEventListener("turbo:render", updateTaxAndProfit);
+
+
