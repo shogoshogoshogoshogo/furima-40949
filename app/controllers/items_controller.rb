@@ -25,10 +25,16 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = '商品が見つかりませんでした'
+    redirect_to root_path
+  end
 
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :status_id, :responsibility_id, :region_id,
