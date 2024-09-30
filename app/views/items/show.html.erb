@@ -7,7 +7,7 @@
       <%= "商品名" %>
     </h2>
     <div class="item-img-content">
-      <%= image_tag "item-sample.png" ,class:"item-box-img" %>
+      <%= image_tag @item.image ,class:"item-box-img" %>
       
       <div class="sold-out">
         <span>Sold Out!!</span>
@@ -45,7 +45,8 @@
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%=  @item.user.nickname %></td>
+          <td class="detail-value"><%=  @item.user.nickname
+           %></td>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
