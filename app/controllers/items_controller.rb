@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create]
-
+  before_action :set_item, only: [:show]
   def index
     @items = Item.order('created_at DESC')
   end
@@ -18,7 +18,17 @@ class ItemsController < ApplicationController
     end
   end
 
+  def show
+  end
+
   private
+
+  def set_item
+    @item = Item.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:alert] = '商品が見つかりませんでした'
+    redirect_to root_path
+  end
 
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :status_id, :responsibility_id, :region_id,
