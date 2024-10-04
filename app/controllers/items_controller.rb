@@ -27,6 +27,12 @@ class ItemsController < ApplicationController
   def show
   end
 
+  def edit
+    return if @item.user == current_user
+
+    redirect_to root_path
+  end
+
   private
 
   def set_item
