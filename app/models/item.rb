@@ -23,10 +23,14 @@ class Item < ApplicationRecord
                             message: 'は300以上9999999以下である必要があります' }
 
   validate :image_attached
+  def sold_out?
+    # 例えば、購入された場合の判定方法。具体的には購入情報を管理するモデルがあると仮定しています。
+    Order.exists?(item_id: id)
+  end
+end
 
   private
 
-  def image_attached
-    errors.add(:image, "can't be blank") unless image.attached?
-  end
+def image_attached
+  errors.add(:image, "can't be blank") unless image.attached?
 end
