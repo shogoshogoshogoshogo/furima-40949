@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_item, only: [:new, :create]
+  before_action :set_item, only: [:index, :create]
   before_action :redirect_if_not_authorized, only: [:new]
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
@@ -15,7 +15,7 @@ class OrdersController < ApplicationController
       redirect_to root_path
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-      render 'index', status: :unprocessable_entity
+      render index, status: :unprocessable_entity
     end
   end
 
@@ -29,8 +29,9 @@ class OrdersController < ApplicationController
   end
 
   def order_params
-    params.require(:order).permit(:total_price,
-                                  address_attributes: [:postal_code, :region_id, :city, :street, :building_name, :phone_number])
+    params.require(:order).permit(
+      address_attributes: [:postal_code, :region_id, :city, :street, :building_name, :phone_number]
+    )
   end
 
   def pay_item

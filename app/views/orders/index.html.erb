@@ -15,7 +15,7 @@
         </h2>
         <div class='buy-item-price'>
           <p class='item-price-text'>¥<%= @item.price %></p>
-          <p class='item-price-sub-text'><%= @item.responsibility %></p>
+          <p class='item-price-sub-text'><%= @item.responsibility.name %></p>
         </div>
       </div>
     </div>
@@ -27,12 +27,12 @@
         支払金額
       </h1>
       <p class='item-payment-price'>
-        ¥<%= @order.name %>
+        ¥<%= @item.price %>
       </p>
     </div>
     <%# /支払額の表示 %>
 
-    <%= form_with id: 'charge-form', class: 'transaction-form-wrap',local: true do |f| %>
+    <%= form_with model: @order, url: item_orders_path(@item), id: 'charge-form', class: 'transaction-form-wrap', local: true do |f| %>
     <%# カード情報の入力 %>
     <div class='credit-card-form'>
       <h1 class='info-input-haedline'>
