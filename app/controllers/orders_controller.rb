@@ -1,37 +1,36 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
-  before_action :redirect_if_not_authorized, only: [:new]
+  # before_action :redirect_if_not_authorized, only: [:index]
   def index
     gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-    @order = Order.new
+    @order_address = OrderAddress.new
   end
 
   def create
-    @order = Order.new(order_params)
-    if @order.valid?
-      pay_item
-      @order.save
+    @order_address = OrderAddress.new(order_params)
+    if @order_address.valid?
+      # pay_item
+      @order_address.save
       redirect_to root_path
     else
       gon.public_key = ENV['PAYJP_PUBLIC_KEY']
-      render index, status: :unprocessable_entity
+      render :index, status: :unprocessable_entity
     end
   end
 
   private
+
+  def order_params
+    params.require(:order_address).permit(:postal_code, :region_id, :city, :street, :building_name,
+                                          :phone_number).merge(user_id: current_user.id, item_id: params[:item_id])
+  end
 
   def set_item
     @item = Item.find(params[:item_id])
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = '商品が見つかりませんでした'
     redirect_to root_path
-  end
-
-  def order_params
-    params.require(:order).permit(
-      address_attributes: [:postal_code, :region_id, :city, :street, :building_name, :phone_number]
-    )
   end
 
   def pay_item

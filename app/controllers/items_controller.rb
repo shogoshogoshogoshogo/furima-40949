@@ -45,16 +45,7 @@ class ItemsController < ApplicationController
     end
   end
 
-  def perchase
-    @order = Order.new(order_params)
-    if @order.valid?
-      pay_item
-      @order.save
-      redirect_to root_path
-    else
-      render :show, status: :unprocessable_entity
-    end
-  end
+  
 
   private
 
