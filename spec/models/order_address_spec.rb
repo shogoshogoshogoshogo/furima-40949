@@ -62,11 +62,13 @@ RSpec.describe OrderAddress, type: :model do
         expect(@order_address.errors.full_messages).to include('Phone number is invalid. Only 10 or 11 digit numbers allowed')
       end
 
-      it 'phone_numberが10桁または11桁でなければ保存できないこと' do
+      it 'phone_numberが9桁では保存できないこと' do
         @order_address.phone_number = '123456789'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number is invalid. Only 10 or 11 digit numbers allowed')
+      end
 
+      it 'phone_numberが12桁では保存できないこと' do
         @order_address.phone_number = '123456789012'
         @order_address.valid?
         expect(@order_address.errors.full_messages).to include('Phone number is invalid. Only 10 or 11 digit numbers allowed')
