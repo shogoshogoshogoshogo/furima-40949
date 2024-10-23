@@ -3,6 +3,7 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
+  has_one :order
 
   # ActiveHashモデルとのアソシエーション
   belongs_to_active_hash :category
@@ -24,7 +25,6 @@ class Item < ApplicationRecord
 
   validate :image_attached
   def sold_out?
-    # 例えば、購入された場合の判定方法。具体的には購入情報を管理するモデルがあると仮定しています。
     Order.exists?(item_id: id)
   end
 end
