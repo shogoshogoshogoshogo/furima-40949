@@ -1,6 +1,5 @@
 <%= render "shared/header" %>
 
-
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
@@ -35,7 +34,7 @@
      <% end %>
      <% else %>
        <% unless @item.sold_out? %>
-      <%= link_to "購入画面に進む", item_orders_path(item_id: @item.id), data: { turbo: false }, class:"item-red-btn"%>
+      <%= link_to  "購入画面に進む", item_orders_path(item_id: @item.id), data: { turbo: false },class:"item-red-btn"%>
      <% end %>
     <% end %>
     <% end %>
@@ -114,3 +113,4 @@
 </div>
 
 <%= render "shared/footer" %>
+
