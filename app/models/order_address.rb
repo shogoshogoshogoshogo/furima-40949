@@ -9,6 +9,7 @@ class OrderAddress
     validates :city
     validates :street
     validates :phone_number, format: { with: /\A[0-9]{10,11}\z/, message: 'is invalid. Only 10 or 11 digit numbers allowed' }
+    validates :token
   end
 
   validates :region_id, numericality: { other_than: 1, message: "can't be blank" }
