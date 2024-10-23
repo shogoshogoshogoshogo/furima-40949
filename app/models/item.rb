@@ -3,6 +3,7 @@ class Item < ApplicationRecord
 
   belongs_to :user
   has_one_attached :image
+  has_one :order
 
   # ActiveHashモデルとのアソシエーション
   belongs_to_active_hash :category
@@ -23,10 +24,13 @@ class Item < ApplicationRecord
                             message: 'は300以上9999999以下である必要があります' }
 
   validate :image_attached
+  def sold_out?
+    Order.exists?(item_id: id)
+  end
+end
 
   private
 
-  def image_attached
-    errors.add(:image, "can't be blank") unless image.attached?
-  end
+def image_attached
+  errors.add(:image, "can't be blank") unless image.attached?
 end

@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :purchase]
+  before_action :redirect_if_not_owner_or_sold_out, only: [:edit, :update, :destroy]
+
   def index
     @items = Item.order('created_at DESC')
   end
@@ -51,6 +53,12 @@ class ItemsController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     flash[:alert] = '商品が見つかりませんでした'
     redirect_to root_path
+  end
+
+  def redirect_if_not_owner_or_sold_out
+    return unless current_user != @item.user || @item.sold_out?
+
+    redirect_to root_path, alert: 'Edit action forbidden'
   end
 
   def item_params
