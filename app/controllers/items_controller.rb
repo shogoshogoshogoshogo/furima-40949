@@ -1,7 +1,8 @@
 class ItemsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :set_item, only: [:show, :edit, :update, :destroy, :purchase]
-  before_action :redirect_if_not_authorized, only: [:purchase, :edit, :edit]
+  before_action :redirect_if_not_owner_or_sold_out, only: [:edit, :update, :destroy]
+
   def index
     @items = Item.order('created_at DESC')
   end
@@ -45,8 +46,6 @@ class ItemsController < ApplicationController
     end
   end
 
-  
-
   private
 
   def set_item
@@ -56,14 +55,14 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
+  def redirect_if_not_owner_or_sold_out
+    return unless current_user != @item.user || @item.sold_out?
+
+    redirect_to root_path, alert: 'Edit action forbidden'
+  end
+
   def item_params
     params.require(:item).permit(:image, :name, :description, :category_id, :status_id, :responsibility_id, :region_id,
                                  :delivery_time_id, :price).merge(user_id: current_user.id)
-  end
-
-  def order_params
-    params.require(:order).permit(:postal_code, :region_id, :city, :street, :building_name, :phone_number).merge(
-      user_id: current_user.id, item_id: params[:id], token: params[:token]
-    )
   end
 end
