@@ -19,4 +19,5 @@ class User < ApplicationRecord
     validates :first_name_kana, format: { with: VALID_KANA_REGEX, message: '全角カタカナのみ使用してください' }
   end
   has_many :orders
+  has_many :items
 end
