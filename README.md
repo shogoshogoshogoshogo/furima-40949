@@ -1,5 +1,5 @@
 Furima ER
-
+[![Image from Gyazo](https://i.gyazo.com/a4ae87b27f14783b885766a78321c6be.gif)](https://gyazo.com/a4ae87b27f14783b885766a78321c6be)
 ## users テーブル
 
 |Column               |Type  |Options                  |
@@ -179,3 +179,4 @@ bash
 % rails s
 工夫したポイント
 企業へPRしたい事項を記載
+
